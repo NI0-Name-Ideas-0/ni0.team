@@ -18,6 +18,51 @@
     </div>
   </section>
 
+  <!-- Gallery -->
+  <section class="mb-12" aria-labelledby="gallery-heading">
+    <h2 id="gallery-heading" class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+      Produktbilder
+    </h2>
+    <div class="relative flex items-center gap-3">
+      <button
+        (click)="prev()"
+        class="shrink-0 flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        aria-label="Vorheriges Bild"
+      >
+        &#8592;
+      </button>
+
+      <div class="flex-1 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-lg px-6 py-16 text-center">
+        <div class="w-12 h-12 mx-auto mb-4 rounded border-2 border-dashed border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-300 dark:text-gray-600 text-xl" aria-hidden="true">
+          &#9974;
+        </div>
+        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ slide().title }}</p>
+        <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">{{ slide().description }}</p>
+      </div>
+
+      <button
+        (click)="next()"
+        class="shrink-0 flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        aria-label="Nächstes Bild"
+      >
+        &#8594;
+      </button>
+    </div>
+
+    <div class="flex justify-center gap-1.5 mt-3" role="tablist" aria-label="Bildnavigation">
+      @for (s of slides(); track $index) {
+        <button
+          role="tab"
+          [attr.aria-selected]="$index === currentSlide()"
+          [attr.aria-label]="'Bild ' + ($index + 1)"
+          (click)="currentSlide.set($index)"
+          class="w-2 h-2 rounded-full transition-colors"
+          [class]="$index === currentSlide() ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'"
+        ></button>
+      }
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="mb-12" aria-labelledby="features-heading">
     <h2 id="features-heading" class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
@@ -33,20 +78,40 @@
     </ul>
   </section>
 
-  <!-- Quick links -->
-  <section aria-labelledby="links-heading">
-    <h2 id="links-heading" class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-      Schnellzugriff
+  <!-- External links -->
+  <section class="mb-12" aria-labelledby="external-links-heading">
+    <h2 id="external-links-heading" class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+      Links
     </h2>
-    <div class="flex flex-wrap gap-3">
-      @for (link of quickLinks(); track link.path) {
-        <a
-          [routerLink]="link.path"
-          class="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white text-sm font-medium rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
-        >
-          {{ link.label }}
-        </a>
+    <ul class="flex flex-col gap-2" role="list">
+      @for (link of externalLinks(); track link.url) {
+        <li>
+          <a
+            [href]="link.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 p-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-300 dark:hover:border-blue-700 transition-colors"
+          >
+            <img
+              [src]="faviconSrc(link)"
+              [alt]="link.label + ' favicon'"
+              width="16"
+              height="16"
+              class="shrink-0 dark:hidden"
+            />
+            <img
+              [src]="faviconDarkSrc(link)"
+              alt=""
+              aria-hidden="true"
+              width="16"
+              height="16"
+              class="shrink-0 hidden dark:block"
+            />
+            <span class="font-medium text-gray-900 dark:text-white text-sm">{{ link.label }}</span>
+            <span class="text-gray-400 dark:text-gray-500 text-xs truncate">{{ link.url }}</span>
+          </a>
+        </li>
       }
-    </div>
+    </ul>
   </section>
 </div>
