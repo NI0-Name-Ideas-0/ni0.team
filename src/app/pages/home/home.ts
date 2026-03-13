@@ -1,9 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+
+type ExternalLink = {
+  label: string;
+  url: string;
+  icon?: string;
+  iconDark?: string;
+};
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -35,8 +41,16 @@ export class HomeComponent {
     'Fortschrittsverfolgung und Berichterstellung',
   ]);
 
-  protected readonly externalLinks = signal([
-    { label: 'Repository', url: 'https://github.com/orgs/NI0-Name-Ideas-0/repositories', domain: 'github.com', icon: 'https://github.githubassets.com/favicons/favicon.png', iconDark: 'https://github.githubassets.com/favicons/favicon-dark.png' },
-    { label: 'ClickUp', url: 'https://app.clickup.com/90121535866/v/s/90126615524', domain: 'app.clickup.com' },
+  protected readonly externalLinks = signal<ExternalLink[]>([
+    { label: 'Repository', url: 'https://github.com/orgs/NI0-Name-Ideas-0/repositories', iconDark: 'https://github.githubassets.com/favicons/favicon-dark.png' },
+    { label: 'ClickUp', url: 'https://app.clickup.com/90121535866/v/s/90126615524' },
   ]);
+
+  protected faviconSrc(link: ExternalLink): string {
+    return link.icon ?? `https://icons.duckduckgo.com/ip3/${new URL(link.url).hostname}.ico`;
+  }
+
+  protected faviconDarkSrc(link: ExternalLink): string {
+    return link.iconDark ?? link.icon ?? `https://icons.duckduckgo.com/ip3/${new URL(link.url).hostname}.ico`;
+  }
 }

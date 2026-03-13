@@ -93,14 +93,14 @@
             class="flex items-center gap-3 p-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-300 dark:hover:border-blue-700 transition-colors"
           >
             <img
-              [src]="link.icon ?? 'https://icons.duckduckgo.com/ip3/' + link.domain + '.ico'"
+              [src]="faviconSrc(link)"
               [alt]="link.label + ' favicon'"
               width="16"
               height="16"
               class="shrink-0 dark:hidden"
             />
             <img
-              [src]="link.iconDark ?? link.icon ?? 'https://icons.duckduckgo.com/ip3/' + link.domain + '.ico'"
+              [src]="faviconDarkSrc(link)"
               alt=""
               aria-hidden="true"
               width="16"
