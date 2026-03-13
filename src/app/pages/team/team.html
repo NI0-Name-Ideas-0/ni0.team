@@ -10,15 +10,22 @@
         class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-6"
         role="listitem"
       >
-        <!-- Avatar initials -->
-        <div
-          class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-4"
-          aria-hidden="true"
-        >
-          <span class="text-blue-700 dark:text-blue-300 font-semibold text-lg">
-            {{ member.name.charAt(0) }}
-          </span>
-        </div>
+        @if (member.github) {
+          <img
+            [src]="getAvatarUrl(member.github)"
+            [alt]="member.name"
+            class="w-12 h-12 rounded-full mb-4"
+          />
+        } @else {
+          <div
+            class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-4"
+            aria-hidden="true"
+          >
+            <span class="text-blue-700 dark:text-blue-300 font-semibold text-lg">
+              {{ member.name.charAt(0) }}
+            </span>
+          </div>
+        }
 
         <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">{{ member.name }}</h2>
         <div class="mb-4 flex flex-wrap gap-1">
