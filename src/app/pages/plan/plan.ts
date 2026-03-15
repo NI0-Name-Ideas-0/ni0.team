@@ -10,78 +10,81 @@ export class PlanComponent {
   protected readonly milestones = signal<Milestone[]>([
     {
       title: 'Projektstart & Teamorganisation',
-      date: '2026-03-01',
-      description: 'Rollenverteilung, Projektsetup, Risikoanalyse',
+      date: '',
+      description: 'Projektziel definieren, Rollenverteilung, Projektplan erstellen, Risikoanalyse durchführen, Git-Repository einrichten, Gruppenhomepage erstellen',
       status: 'done',
     },
     {
-      title: 'Anforderungsanalyse',
-      date: '2026-03-15',
-      description: 'Lastenheft, Anforderungsdokumentation, Stakeholder-Analyse',
+      title: 'Projektinfrastruktur & Arbeitsumgebung',
+      date: '',
+      description: 'IDE und UML-Tools auswählen, Entwicklungsumgebung einrichten, Git-Workflow festlegen, Moodle-Ablagestruktur kennenlernen',
+      status: 'done',
+    },
+    {
+      title: 'Recherche & Marktanalyse',
+      date: '',
+      description: 'Literaturrecherche, Analyse bestehender Planungssysteme, Terminologie erarbeiten, Technologien evaluieren, Recherchebericht erstellen',
       status: 'in-progress',
     },
     {
-      title: 'Systemdesign',
-      date: '2026-04-01',
-      description: 'Architektur, UML-Diagramme, Datenbankschema',
-      status: 'pending',
-    },
-    {
-      title: 'Implementierung Phase 1',
-      date: '2026-04-20',
-      description: 'Backend-Grundstruktur, API-Design, Datenbankanbindung',
-      status: 'pending',
-    },
-    {
-      title: 'Implementierung Phase 2',
-      date: '2026-05-10',
-      description: 'Frontend-Entwicklung, Integration Backend/Frontend',
-      status: 'pending',
-    },
-    {
-      title: 'Testing & Qualitätssicherung',
-      date: '2026-05-25',
-      description: 'Unit-Tests, Integrationstests, Usability-Tests',
-      status: 'pending',
-    },
-    {
-      title: 'Abgabe & Präsentation',
-      date: '2026-06-15',
-      description: 'Finale Abgabe, Projektpräsentation, Dokumentation',
-      status: 'pending',
-    },
-  ]);
-
-  protected readonly workPackages = signal([
-    {
-      id: 'AP1',
-      title: 'Projektmanagement',
-      tasks: ['Rollenverteilung', 'Meetingprotokoll', 'Risikoverwaltung'],
-    },
-    {
-      id: 'AP2',
       title: 'Anforderungsanalyse',
-      tasks: ['Lastenheft', 'Pflichtenheft', 'Use-Case-Diagramme'],
+      date: '',
+      description: 'Glossar erstellen, Lastenheft ausarbeiten, Systemfunktionen definieren, Use-Cases identifizieren, Review vorbereiten',
+      status: 'pending',
     },
     {
-      id: 'AP3',
-      title: 'Systemdesign',
-      tasks: ['Architekturdiagramm', 'ER-Diagramm', 'Klassendiagramm'],
+      title: 'Vorprojekt & Softwarestudie',
+      date: '',
+      description: 'Prototyp planen, Architekturideen entwickeln, Designbeschreibung erstellen, Beispielimplementierung umsetzen, Demo präsentieren',
+      status: 'pending',
     },
     {
-      id: 'AP4',
-      title: 'Implementierung',
-      tasks: ['Backend (Go)', 'Frontend (Angular)', 'Datenbankschema'],
+      title: 'Qualitäts- und Dokumentationskonzept',
+      date: '',
+      description: 'Coding-Conventions definieren, Dokumentationskonzept erstellen, Tools für Qualitätssicherung festlegen, Dokumentationsstandards festlegen',
+      status: 'pending',
     },
     {
-      id: 'AP5',
-      title: 'Testing',
-      tasks: ['Testplan', 'Unit-Tests', 'Systemtests'],
+      title: 'Pflichtenheft & finale Anforderungen',
+      date: '',
+      description: 'Lastenheft konkretisieren, Pflichtenheft erstellen, Glossar aktualisieren, Funktionsumfang finalisieren',
+      status: 'pending',
     },
     {
-      id: 'AP6',
-      title: 'Dokumentation',
-      tasks: ['Entwicklerdokumentation', 'Benutzerdokumentation', 'Abschlussbericht'],
+      title: 'Systemdesign & Modellierung',
+      date: '',
+      description: 'UML-Klassendiagramme erstellen, Architektur definieren, dynamisches Modell entwickeln, Designbeschreibung erstellen',
+      status: 'pending',
     },
+    {
+      title: 'Testplanung',
+      date: '',
+      description: 'Testkonzept definieren, Komponententests planen, Systemtests planen, Testdaten definieren, Testorganisation festlegen',
+      status: 'pending',
+    },
+    {
+      title: 'Implementierungsplanung',
+      date: '',
+      description: 'User Stories definieren, Implementierungsplan erstellen, Pair-Programming Teams festlegen, Releases planen',
+      status: 'pending',
+    },
+    {
+      title: 'Iterative Implementierung',
+      date: '',
+      description: 'Stories implementieren, Code integrieren, wöchentliche Releases erstellen, Dokumentation aktualisieren, Tests durchführen',
+      status: 'pending',
+    },
+    {
+      title: 'Code Review & Qualitätssicherung',
+      date: '',
+      description: 'Codequalität prüfen, Coding-Conventions kontrollieren, Testabdeckung überprüfen, Dokumentation validieren',
+      status: 'pending',
+    },
+    {
+      title: 'Projektabschluss & Endabnahme',
+      date: '',
+      description: 'Finale Softwareversion erstellen, Dokumentation vervollständigen, Demo bereitstellen, Endpräsentation und Abnahme durchführen',
+      status: 'pending',
+    }
   ]);
 }

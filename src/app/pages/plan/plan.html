@@ -58,31 +58,4 @@
       }
     </ol>
   </section>
-
-  <!-- Arbeitspakete -->
-  <section class="motion-safe:animate-fade-in-up-delay-1" aria-labelledby="wp-heading">
-    <h2 id="wp-heading" class="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-      Projektstrukturplan (Arbeitspakete)
-    </h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      @for (wp of workPackages(); track wp.id) {
-        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="text-xs font-mono font-bold bg-blue-600 dark:bg-blue-700 text-white px-2 py-0.5 rounded">
-              {{ wp.id }}
-            </span>
-            <h3 class="text-sm font-semibold text-gray-900 dark:text-white">{{ wp.title }}</h3>
-          </div>
-          <ul class="space-y-1" role="list">
-            @for (task of wp.tasks; track task) {
-              <li class="text-xs text-gray-600 dark:text-gray-400 flex items-center gap-1.5">
-                <span class="text-gray-300 dark:text-gray-600" aria-hidden="true">—</span>
-                {{ task }}
-              </li>
-            }
-          </ul>
-        </div>
-      }
-    </div>
-  </section>
 </div>
