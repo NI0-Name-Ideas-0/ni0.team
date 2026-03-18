@@ -10,6 +10,8 @@ export class ContentService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'https://content.ni0.team';
 
+  private readonly date = Date.now(); // Used to prevent caching of content
+
   /**
    * Fetch content from the external content repository.
    * @param page The page name (e.g., 'team', 'home', 'project')
@@ -20,7 +22,7 @@ export class ContentService {
     const error = signal<string | null>(null);
 
     const data = toSignal(
-      this.http.get<T>(`${this.baseUrl}/${page}.json`).pipe(
+      this.http.get<T>(`${this.baseUrl}/${page}.json?_t=${this.date}`).pipe(
         map((response) => {
           loading.set(false);
           error.set(null);
