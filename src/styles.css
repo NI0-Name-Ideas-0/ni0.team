@@ -46,3 +46,7 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+
+@utility font-logo {
+  font-family: 'Roboto', sans-serif;
+}
