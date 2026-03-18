@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import type { TeamMember } from '../../models/team-member';
+import { ContentService } from '../../services/content.service';
+
+type TeamContent = {
+  teamMembers: TeamMember[];
+};
 
 @Component({
   selector: 'app-team',
@@ -7,36 +12,15 @@ import type { TeamMember } from '../../models/team-member';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeamComponent {
+  private readonly contentService = inject(ContentService);
+  private readonly content = this.contentService.fetchContent<TeamContent>('team');
+
+  protected readonly members = computed(() => this.content.data()?.teamMembers ?? []);
+  protected readonly loading = this.content.loading;
+  protected readonly error = this.content.error;
+
   protected getAvatarUrl(github: string): string {
     const username = github.split('/').pop()!;
     return `https://github.com/${username}.png`;
   }
-
-  protected readonly members = signal<TeamMember[]>([
-    {
-      name: 'Paul Berndt',
-      roles: ['Projektleitung'],
-      github: 'https://github.com/Vectabyte',
-    },
-    {
-      name: 'Felix Weglehner',
-      roles: ['Verantwortlicher für Modellierung'],
-      github: 'https://github.com/Placeblock',
-    },
-    {
-      name: 'Elias Kerlin',
-      roles: ['Technische Assistenz', 'Verantwortlicher für Tests'],
-      github: 'https://github.com/LordEliasTM',
-    },
-    {
-      name: 'Konstantin Fastovski',
-      roles: ['Verantwortlicher für Qualitätssicherung und Dokumentation'],
-      github: 'https://github.com/Konstantin-Fastovski',
-    },
-    {
-      name: 'Silas Rißler',
-      roles: ['Verantwortlicher für Recherche', 'Verantwortlicher für Implementierung'],
-      github: 'https://github.com/orgs/NI0-Name-Ideas-0/people/R88issi',
-    },
-  ]);
 }

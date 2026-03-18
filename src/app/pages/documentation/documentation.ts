@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import type { ProgressEntry } from '../../models/progress-entry';
+import { ContentService } from '../../services/content.service';
+
+type DocumentationContent = {
+  entries: ProgressEntry[];
+};
 
 @Component({
   selector: 'app-documentation',
@@ -7,26 +12,10 @@ import type { ProgressEntry } from '../../models/progress-entry';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentationComponent {
-  protected readonly entries = signal<ProgressEntry[]>([
-    {
-      week: 'Woche 1',
-      date: '03.03. – 07.03.2026',
-      items: [
-        'Projekt gestartet, Repository angelegt',
-        'Rollen im Team verteilt',
-        'Kick-off Meeting abgehalten',
-        'Risikoanalyse erstellt',
-      ],
-    },
-    {
-      week: 'Woche 2',
-      date: '10.03. – 14.03.2026',
-      items: [
-        'Anforderungen gesammelt (Interviews & Brainstorming)',
-        'Lastenheft begonnen',
-        'Erste Use-Case-Diagramme erstellt',
-        'Technologiestack festgelegt',
-      ],
-    },
-  ]);
+  private readonly contentService = inject(ContentService);
+  private readonly content = this.contentService.fetchContent<DocumentationContent>('documentation');
+
+  protected readonly entries = computed(() => this.content.data()?.entries ?? []);
+  protected readonly loading = this.content.loading;
+  protected readonly error = this.content.error;
 }
