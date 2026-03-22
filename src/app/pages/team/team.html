@@ -1,8 +1,15 @@
 <div class="max-w-5xl mx-auto px-4 py-12">
-  <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 motion-safe:animate-fade-in-up">Team</h1>
-  <p class="text-gray-500 dark:text-gray-400 mb-10 motion-safe:animate-fade-in-up">
-    Unser Team besteht aus Studierenden im Rahmen der Lehrveranstaltung Software Engineering.
-  </p>
+  <div class="flex flex-col items-center text-center mb-10">
+    <img
+      src="/team_logo.svg"
+      alt="NI0 Logo"
+      aria-hidden="true"
+      class="h-14 w-auto mb-6 motion-safe:animate-fade-in-up"
+    />
+    <p class="text-gray-500 dark:text-gray-400 max-w-2xl motion-safe:animate-fade-in-up">
+      Unser Team besteht aus Studierenden im Rahmen der Lehrveranstaltung Software Engineering.
+    </p>
+  </div>
 
   <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-6" role="list">
     @for (member of members(); track member.name) {

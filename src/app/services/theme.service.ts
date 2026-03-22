@@ -18,6 +18,7 @@ export class ThemeService {
   private resolveInitial(): boolean {
     const stored = localStorage.getItem('theme');
     if (stored !== null) return stored === 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    //return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return true; // Default to dark mode for first-time visitors
   }
 }
