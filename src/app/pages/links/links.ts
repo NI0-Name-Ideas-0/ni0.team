@@ -8,8 +8,13 @@ type ExternalLink = {
   iconDark?: string;
 };
 
+type LinkSection = {
+  title: string;
+  links: ExternalLink[];
+};
+
 type LinksContent = {
-  externalLinks: ExternalLink[];
+  sections: LinkSection[];
 };
 
 @Component({
@@ -20,9 +25,9 @@ type LinksContent = {
 })
 export class LinksComponent {
   private readonly contentService = inject(ContentService);
-  private readonly content = this.contentService.fetchContent<LinksContent>('home');
+  private readonly content = this.contentService.fetchContent<LinksContent>('links');
 
-  protected readonly externalLinks = computed(() => this.content.data()?.externalLinks ?? []);
+  protected readonly sections = computed(() => this.content.data()?.sections ?? []);
   protected readonly loading = this.content.loading;
   protected readonly error = this.content.error;
 
