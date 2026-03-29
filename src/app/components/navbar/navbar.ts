@@ -18,6 +18,7 @@ export class NavbarComponent {
     { label: 'Team', path: '/team' },
     { label: 'Projektplan', path: '/plan' },
     { label: 'Dokumentation', path: '/documentation' },
+    { label: 'Links', path: '/links' },
   ];
 
   protected toggleMenu(): void {

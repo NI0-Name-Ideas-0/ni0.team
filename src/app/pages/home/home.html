@@ -111,40 +111,4 @@
     </ul>
   </section>
 
-  <!-- External links -->
-  <section class="mb-12 motion-safe:animate-fade-in-up-delay-2" aria-labelledby="external-links-heading">
-    <h2 id="external-links-heading" class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-      Links
-    </h2>
-    <ul class="flex flex-col gap-2" role="list">
-      @for (link of externalLinks(); track link.url) {
-        <li>
-          <a
-            [href]="link.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-3 p-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-300 dark:hover:border-blue-700 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200"
-          >
-            <img
-              [src]="faviconSrc(link)"
-              [alt]="link.label + ' favicon'"
-              width="16"
-              height="16"
-              class="shrink-0 dark:hidden"
-            />
-            <img
-              [src]="faviconDarkSrc(link)"
-              alt=""
-              aria-hidden="true"
-              width="16"
-              height="16"
-              class="shrink-0 hidden dark:block"
-            />
-            <span class="font-medium text-gray-900 dark:text-white text-sm">{{ link.label }}</span>
-            <span class="text-gray-400 dark:text-gray-500 text-xs truncate">{{ link.url }}</span>
-          </a>
-        </li>
-      }
-    </ul>
-  </section>
 </div>

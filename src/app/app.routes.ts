@@ -24,4 +24,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/under-construction/under-construction').then(m => m.UnderConstructionComponent),
   },
+  {
+    path: 'links',
+    loadComponent: () => import('./pages/links/links').then(m => m.LinksComponent),
+  },
 ];
