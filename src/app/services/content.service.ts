@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'https://content.ni0.team';
+  private readonly baseUrl = environment.contentBaseUrl;
 
   private readonly date = Date.now(); // Used to prevent caching of content
 
