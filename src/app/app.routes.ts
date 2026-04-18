@@ -21,8 +21,7 @@ export const routes: Routes = [
   },
   {
     path: 'documentation',
-    loadComponent: () =>
-      import('./pages/under-construction/under-construction').then(m => m.UnderConstructionComponent),
+    loadComponent: () => import('./pages/documentation/documentation').then(m => m.DocumentationComponent),
   },
   {
     path: 'links',

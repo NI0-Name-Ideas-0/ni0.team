@@ -1,9 +1,20 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import type { ProgressEntry } from '../../models/progress-entry';
 import { ContentService } from '../../services/content.service';
 
+type ExternalLink = {
+  label: string;
+  url: string;
+  icon?: string;
+  iconDark?: string;
+};
+
+type LinkSection = {
+  title: string;
+  links: ExternalLink[];
+};
+
 type DocumentationContent = {
-  entries: ProgressEntry[];
+  sections: LinkSection[];
 };
 
 @Component({
@@ -15,7 +26,15 @@ export class DocumentationComponent {
   private readonly contentService = inject(ContentService);
   private readonly content = this.contentService.fetchContent<DocumentationContent>('documentation');
 
-  protected readonly entries = computed(() => this.content.data()?.entries ?? []);
+  protected readonly sections = computed(() => this.content.data()?.sections ?? []);
   protected readonly loading = this.content.loading;
   protected readonly error = this.content.error;
+
+  protected faviconSrc(link: ExternalLink): string {
+    return link.icon ?? `https://icons.duckduckgo.com/ip3/${new URL(link.url).hostname}.ico`;
+  }
+
+  protected faviconDarkSrc(link: ExternalLink): string {
+    return link.iconDark ?? link.icon ?? `https://icons.duckduckgo.com/ip3/${new URL(link.url).hostname}.ico`;
+  }
 }
