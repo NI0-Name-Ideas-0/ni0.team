@@ -9,7 +9,7 @@ export const routes: Routes = [
   {
     path: 'project',
     loadComponent: () =>
-      import('./pages/under-construction/under-construction').then(m => m.UnderConstructionComponent),
+      import('./pages/project/project').then(m => m.ProjectComponent),
   },
   {
     path: 'team',
