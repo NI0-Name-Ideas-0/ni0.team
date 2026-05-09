@@ -14,10 +14,10 @@ export class NavbarComponent {
 
   protected readonly navLinks = [
     { label: 'Home', path: '/home' },
-    { label: 'Projekt', path: '/project' },
+    { label: 'Dokumentation', path: '/project' },
     { label: 'Team', path: '/team' },
     { label: 'Projektplan', path: '/plan' },
-    { label: 'Dokumentation', path: '/documentation' },
+    { label: 'Projekt', path: '/documentation' },
     { label: 'Links', path: '/links' },
   ];
 
