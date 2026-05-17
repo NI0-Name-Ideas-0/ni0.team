@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { ContentService } from '../../services/content.service';
 import { ThemeService } from '../../services/theme.service';
 
@@ -59,6 +59,29 @@ export class HomeComponent {
   });
 
   protected readonly currentAlt = computed(() => this.slides()[this.currentSlide()].alt);
+
+  protected readonly lightboxOpen = signal(false);
+  private readonly lightboxDialog = viewChild<ElementRef<HTMLDialogElement>>('lightboxDialog');
+
+  constructor() {
+    effect(() => {
+      const dialog = this.lightboxDialog()?.nativeElement;
+      if (!dialog) return;
+      if (this.lightboxOpen()) {
+        dialog.showModal();
+      } else if (dialog.open) {
+        dialog.close();
+      }
+    });
+  }
+
+  protected openLightbox(): void {
+    this.lightboxOpen.set(true);
+  }
+
+  protected closeLightbox(): void {
+    this.lightboxOpen.set(false);
+  }
 
   protected prev(): void {
     this.currentSlide.update(i => (i - 1 + this.slides().length) % this.slides().length);

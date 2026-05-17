@@ -59,11 +59,18 @@
       </button>
 
       <div class="flex-1 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-        <img
-          [src]="currentImage()"
-          [alt]="currentAlt()"
-          class="w-full max-h-[32rem] object-contain"
-        />
+        <button
+          type="button"
+          class="w-full cursor-zoom-in"
+          [attr.aria-label]="'Bild vergrößern: ' + currentAlt()"
+          (click)="openLightbox()"
+        >
+          <img
+            [src]="currentImage()"
+            [alt]="currentAlt()"
+            class="w-full max-h-[32rem] object-contain"
+          />
+        </button>
       </div>
 
       <button
@@ -108,3 +115,20 @@
   </section>
 
 </div>
+
+<!-- Lightbox -->
+<dialog
+  #lightboxDialog
+  class="m-0 p-0 w-screen h-screen max-w-none max-h-none bg-black/80 dark:bg-black/60 border-0 outline-none"
+  (click)="closeLightbox()"
+  (close)="closeLightbox()"
+  aria-label="Vergrößerte Bildansicht"
+>
+  <div class="flex items-center justify-center w-full h-full">
+    <img
+      [src]="currentImage()"
+      [alt]="currentAlt()"
+      class="max-w-[95vw] max-h-[95vh] object-contain rounded-lg shadow-2xl"
+    />
+  </div>
+</dialog>
