@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ContentService } from '../../services/content.service';
+import { ThemeService } from '../../services/theme.service';
 
 type HomeContent = {
   projectName: string;
@@ -7,6 +8,12 @@ type HomeContent = {
   tagline: string;
   heroSubtitle: string;
   features: string[];
+};
+
+type ImageSlide = {
+  dark: string;
+  light: string;
+  alt: string;
 };
 
 @Component({
@@ -17,6 +24,7 @@ type HomeContent = {
 })
 export class HomeComponent {
   private readonly contentService = inject(ContentService);
+  private readonly themeService = inject(ThemeService);
   private readonly content = this.contentService.fetchContent<HomeContent>('home');
 
   protected readonly projectName = computed(() => this.content.data()?.projectName ?? '');
@@ -26,19 +34,37 @@ export class HomeComponent {
   protected readonly loading = this.content.loading;
   protected readonly error = this.content.error;
 
-  protected readonly images = signal([
-    '/product_images/main.png',
-    '/product_images/create task.png',
-    '/product_images/popup.png',
-    '/product_images/settings organizations.png',
+  protected readonly slides = signal<ImageSlide[]>([
+    {
+      dark: '/product_images/Screenshot 2026-05-17 183717.png',
+      light: '/product_images/Screenshot 2026-05-17 183910.png',
+      alt: 'Hauptseite',
+    },
+    {
+      dark: '/product_images/Screenshot 2026-05-17 184034.png',
+      light: '/product_images/Screenshot 2026-05-17 184012.png',
+      alt: 'Aufgabe erstellen',
+    },
+    {
+      dark: '/product_images/Screenshot 2026-05-17 184115.png',
+      light: '/product_images/Screenshot 2026-05-17 184149.png',
+      alt: 'Arbeitspräferenzen',
+    },
   ]);
   protected readonly currentSlide = signal(0);
 
+  protected readonly currentImage = computed(() => {
+    const slide = this.slides()[this.currentSlide()];
+    return this.themeService.dark() ? slide.dark : slide.light;
+  });
+
+  protected readonly currentAlt = computed(() => this.slides()[this.currentSlide()].alt);
+
   protected prev(): void {
-    this.currentSlide.update(i => (i - 1 + this.images().length) % this.images().length);
+    this.currentSlide.update(i => (i - 1 + this.slides().length) % this.slides().length);
   }
 
   protected next(): void {
-    this.currentSlide.update(i => (i + 1) % this.images().length);
+    this.currentSlide.update(i => (i + 1) % this.slides().length);
   }
 }
